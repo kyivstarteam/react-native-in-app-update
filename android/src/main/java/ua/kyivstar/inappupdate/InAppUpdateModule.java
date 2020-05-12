@@ -16,7 +16,7 @@ public class InAppUpdateModule extends ReactContextBaseJavaModule {
 
     @Override
     public String getName() {
-        return "InAppUpdate";
+        return Constants.RN_MODULE_NAME;
     }
 
     @ReactMethod

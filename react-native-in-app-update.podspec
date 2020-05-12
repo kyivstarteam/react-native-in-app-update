@@ -11,7 +11,7 @@ Pod::Spec.new do |s|
                    DESC
   s.homepage     = "https://github.com/kyivstarteam/react-native-in-app-update"
   s.license      = "MIT"
-  s.authors      = { "Kyivstar" => "" }
+  s.authors      = { "Kyivstar Digital" => "" }
   s.platforms    = { :ios => "9.0" }
   s.source       = { :git => "https://github.com/kyivstarteam/react-native-in-app-update.git", :tag => "#{s.version}" }
 

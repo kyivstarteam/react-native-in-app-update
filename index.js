@@ -1,5 +1,5 @@
 import { NativeModules } from 'react-native';
 
-const { InAppUpdate } = NativeModules;
+const { RNKInAppUpdate } = NativeModules;
 
-export default InAppUpdate;
+export default RNKInAppUpdate;

@@ -1,13 +1,21 @@
 #import "InAppUpdate.h"
+#import <React/RCTBridgeModule.h>
 
-@implementation InAppUpdate
+@interface RCT_EXTERN_MODULE(RNKInAppUpdate, NSObject)
 
-RCT_EXPORT_MODULE()
+RCT_EXTERN_METHOD(sampleMethod:(NSString *)str
+                  num:(NSInteger *)num
+                  callback:(RCTResponseSenderBlock)callback
+                  )
 
-RCT_EXPORT_METHOD(sampleMethod:(NSString *)stringArgument numberParameter:(nonnull NSNumber *)numberArgument callback:(RCTResponseSenderBlock)callback)
++ (BOOL)requiresMainQueueSetup
 {
-    // TODO: Implement some actually useful functionality
-    callback(@[[NSString stringWithFormat: @"numberArgument: %@ stringArgument: %@", numberArgument, stringArgument]]);
+    return YES;
+}
+
+- (dispatch_queue_t)methodQueue
+{
+    return dispatch_get_main_queue();
 }
 
 @end

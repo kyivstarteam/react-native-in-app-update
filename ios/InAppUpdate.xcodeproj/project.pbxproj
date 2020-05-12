@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3A24B95A246AB6970075C446 /* InAppUpdate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A24B959246AB6970075C446 /* InAppUpdate.m */; };
+		3AD1BFD9246AC141007ED2A3 /* InAppUpdateModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD1BFD8246AC141007ED2A3 /* InAppUpdateModule.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -26,6 +27,8 @@
 		134814201AA4EA6300B7C361 /* libInAppUpdate.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libInAppUpdate.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A24B958246AB6970075C446 /* InAppUpdate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InAppUpdate.h; sourceTree = "<group>"; };
 		3A24B959246AB6970075C446 /* InAppUpdate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InAppUpdate.m; sourceTree = "<group>"; };
+		3AD1BFD7246AC141007ED2A3 /* InAppUpdate-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "InAppUpdate-Bridging-Header.h"; sourceTree = "<group>"; };
+		3AD1BFD8246AC141007ED2A3 /* InAppUpdateModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InAppUpdateModule.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,7 +55,9 @@
 			children = (
 				3A24B958246AB6970075C446 /* InAppUpdate.h */,
 				3A24B959246AB6970075C446 /* InAppUpdate.m */,
+				3AD1BFD8246AC141007ED2A3 /* InAppUpdateModule.swift */,
 				134814211AA4EA7D00B7C361 /* Products */,
+				3AD1BFD7246AC141007ED2A3 /* InAppUpdate-Bridging-Header.h */,
 			);
 			sourceTree = "<group>";
 		};
@@ -87,6 +92,7 @@
 				TargetAttributes = {
 					58B511DA1A9E6C8500147676 = {
 						CreatedOnToolsVersion = 6.1.1;
+						LastSwiftMigration = 1140;
 					};
 				};
 			};
@@ -114,6 +120,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3A24B95A246AB6970075C446 /* InAppUpdate.m in Sources */,
+				3AD1BFD9246AC141007ED2A3 /* InAppUpdateModule.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -234,32 +241,41 @@
 		58B511F01A9E6C8500147676 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(SRCROOT)/../../../React/**",
 					"$(SRCROOT)/../../react-native/React/**",
 				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = InAppUpdate;
 				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "InAppUpdate-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
 		58B511F11A9E6C8500147676 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(SRCROOT)/../../../React/**",
 					"$(SRCROOT)/../../react-native/React/**",
 				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = InAppUpdate;
 				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "InAppUpdate-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
