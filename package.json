@@ -1,5 +1,5 @@
 {
-  "name": "react-native-in-app-update",
+  "name": "@kyivstarteam/react-native-in-app-update",
   "title": "React Native In App Update",
   "version": "1.0.0",
   "description": "In App Update from native services",
