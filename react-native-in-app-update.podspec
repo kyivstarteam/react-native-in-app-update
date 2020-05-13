@@ -13,6 +13,7 @@ Pod::Spec.new do |s|
   s.license      = "MIT"
   s.authors      = { "Kyivstar Digital" => "" }
   s.platforms    = { :ios => "9.0" }
+  s.swift_version = "5"
   s.source       = { :git => "https://github.com/kyivstarteam/react-native-in-app-update.git", :tag => "#{s.version}" }
 
   s.source_files = "ios/**/*.{h,c,m,swift}"
