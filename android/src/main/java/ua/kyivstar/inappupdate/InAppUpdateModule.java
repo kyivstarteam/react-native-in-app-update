@@ -1,5 +1,6 @@
 package ua.kyivstar.inappupdate;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.util.Log;
 
@@ -23,7 +24,7 @@ public class InAppUpdateModule extends ReactContextBaseJavaModule implements Act
     }
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+    public void onActivityResult(Activity activity, int requestCode, int resultCode, Intent data) {
         if (requestCode == Constants.REQUEST_UPDATE_CODE) {
             if (resultCode != RESULT_OK) {
                 updateStatus = Constants.FAILED_UPDATE_STATUS;
@@ -32,6 +33,11 @@ public class InAppUpdateModule extends ReactContextBaseJavaModule implements Act
             }
             Log.d(Constants.DEBUG_TAG, "Update status: " + updateStatus);
         }
+    }
+
+    @Override
+    public void onNewIntent(Intent intent) {
+
     }
 
     @Override
