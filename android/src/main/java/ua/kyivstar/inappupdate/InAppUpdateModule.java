@@ -2,13 +2,21 @@ package ua.kyivstar.inappupdate;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.support.annotation.Nullable;
 import android.util.Log;
 
 import com.facebook.react.bridge.ActivityEventListener;
+import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
+import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
+import com.facebook.react.bridge.WritableMap;
+import com.facebook.react.modules.core.DeviceEventManagerModule;
+import com.google.android.play.core.install.InstallState;
+import com.google.android.play.core.install.InstallStateUpdatedListener;
+import com.google.android.play.core.install.model.InstallStatus;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -22,6 +30,7 @@ public class InAppUpdateModule extends ReactContextBaseJavaModule implements Act
         this.updateStatus = Constants.INACTIVE_UPDATE_STATUS;
         this.reactContext = reactContext;
     }
+
 
     @Override
     public void onActivityResult(Activity activity, int requestCode, int resultCode, Intent data) {
@@ -104,7 +113,59 @@ public class InAppUpdateModule extends ReactContextBaseJavaModule implements Act
     }
 
     @ReactMethod
+    public void isUpdatedDownloaded(final Promise promise) {
+        inAppUpdateService.isUpdatedDownloaded(new InAppUpdateService.CallbackInterface() {
+            @Override
+            public <T> void invoke(T result, String error) {
+                if (error != null) {
+                    promise.reject(null, error);
+                    return;
+                }
+
+                promise.resolve(result);
+                return;
+            }
+        });
+    }
+
+    @ReactMethod
+    public void completeUpdate() {
+        inAppUpdateService.completeUpdate();
+    }
+
+    @ReactMethod
     public void getUpdateStatus(Promise promise) {
         promise.resolve(updateStatus);
     }
+
+    private void sendEvent(ReactContext reactContext,
+                           String eventName,
+                           @Nullable WritableMap params) {
+        reactContext
+                .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
+                .emit(eventName, params);
+    }
+
+    @ReactMethod
+    public void subscribeForDownloadedState() {
+        inAppUpdateService.appUpdateManager.registerListener(finishUpdateListener);
+    }
+
+    @ReactMethod
+    public void unsubscribeForDownloadedState() {
+        inAppUpdateService.appUpdateManager.unregisterListener(finishUpdateListener);
+    }
+
+    private InstallStateUpdatedListener finishUpdateListener = new
+            InstallStateUpdatedListener() {
+                @Override
+                public void onStateUpdate(InstallState state) {
+                    if (state.installStatus() == InstallStatus.DOWNLOADED){
+                        WritableMap params = Arguments.createMap();
+                        params.putString("status", Constants.FINISH_UPDATE_DOWNLOADING_STATUS);
+
+                        sendEvent(reactContext, Constants.FINISH_UPDATE_DOWNLOADING_EVENT_NAME, params);
+                    }
+                }
+            };
 }

@@ -1,9 +1,12 @@
 package ua.kyivstar.inappupdate;
 
+import com.facebook.react.bridge.WritableMap;
+import com.facebook.react.bridge.WritableNativeMap;
 import com.google.android.play.core.appupdate.AppUpdateInfo;
 import com.google.android.play.core.appupdate.AppUpdateManager;
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory;
 import com.google.android.play.core.install.model.AppUpdateType;
+import com.google.android.play.core.install.model.InstallStatus;
 import com.google.android.play.core.install.model.UpdateAvailability;
 import com.google.android.play.core.tasks.OnFailureListener;
 import com.google.android.play.core.tasks.OnSuccessListener;
@@ -20,7 +23,7 @@ final public class InAppUpdateService {
         <T> void invoke(T result, String error);
     }
 
-    private AppUpdateManager appUpdateManager;
+    public AppUpdateManager appUpdateManager;
     private Integer stalenessDaysForUpdate;
     private Integer updateType;
     private Activity activity;
@@ -40,6 +43,18 @@ final public class InAppUpdateService {
         appContext = context;
     }
 
+    private Boolean checkForStaleness(Integer clientVersionStalenessDays) {
+        if (clientVersionStalenessDays == null && stalenessDaysForUpdate == 0) {
+            return true;
+        }
+
+        if (clientVersionStalenessDays != null && clientVersionStalenessDays >= stalenessDaysForUpdate) {
+            return true;
+        }
+
+        return false;
+    }
+
     public void isUpdateAvailable(final CallbackInterface callback) {
         Task<AppUpdateInfo> appUpdateInfoTask = appUpdateManager.getAppUpdateInfo();
 
@@ -47,8 +62,7 @@ final public class InAppUpdateService {
                                                    @Override
                                                    public void onSuccess(AppUpdateInfo result) {
                                                        if (result.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE
-                                                               && result.clientVersionStalenessDays() != null
-                                                               && result.clientVersionStalenessDays() >= stalenessDaysForUpdate
+                                                               && checkForStaleness(result.clientVersionStalenessDays())
                                                                && result.isUpdateTypeAllowed(updateType)) {
                                                            Log.d(Constants.DEBUG_TAG, "Update available");
                                                            callback.invoke(true, null);
@@ -62,7 +76,6 @@ final public class InAppUpdateService {
         appUpdateInfoTask.addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(Exception e) {
-                Log.d(Constants.DEBUG_TAG, "Error: " + e.toString());
                 callback.invoke(null, e.toString());
             }
         });
@@ -121,6 +134,33 @@ final public class InAppUpdateService {
                 callback.invoke(null, e.toString());
             }
         });
+    }
+
+    public void isUpdatedDownloaded(final CallbackInterface callback) {
+        final Task<AppUpdateInfo> appUpdateInfoTask = appUpdateManager.getAppUpdateInfo();
+
+        appUpdateInfoTask.addOnSuccessListener(new OnSuccessListener<AppUpdateInfo>() {
+            @Override
+            public void onSuccess(AppUpdateInfo appUpdateInfo) {
+                if (appUpdateInfo.installStatus() == InstallStatus.DOWNLOADED) {
+                    callback.invoke(true, null);
+                } else {
+                    callback.invoke(false, null);
+                }
+            }
+        });
+
+        appUpdateInfoTask.addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(Exception e) {
+                Log.d(Constants.DEBUG_TAG, "Error: " + e.toString());
+                callback.invoke(null, e.toString());
+            }
+        });
+    }
+
+    public void completeUpdate() {
+        appUpdateManager.completeUpdate();
     }
 }
 

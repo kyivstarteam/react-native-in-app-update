@@ -1,7 +1,7 @@
-import { NativeModules } from 'react-native';
+import { NativeModules, NativeEventEmitter } from 'react-native';
 const RNKInAppUpdate = NativeModules.RNKInAppUpdate;
 
-if (Platform.OS === 'ios') {
+if (__DEV__ && Platform.OS === 'ios' ) {
   console.warn(`@kyivstarteam/react-native-in-app-update: Module does not support ios platform`);
 }
 
@@ -14,4 +14,5 @@ if (!RNKInAppUpdate) {
   );
 }
 
+export const RNKInAppUpdateEvents = new NativeEventEmitter(RNKInAppUpdate);
 export default RNKInAppUpdate;
