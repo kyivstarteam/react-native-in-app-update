@@ -24,43 +24,43 @@ class InAppUpdate {
     return Platform.OS === 'android';
   }
 
-  async isUpdateAvailable() {
+  isUpdateAvailable = async () => {
     if (this.isSupportedPlatform) {
       return this.rnkInAppUpdate.isUpdateAvailable();
     }
   }
 
-  async isUpdatePaused() {
+  isUpdatePaused = async () => {
     if (this.isSupportedPlatform) {
       return this.rnkInAppUpdate.isUpdatePaused();
     }
   }
 
-  async startUpdate() {
+  startUpdate = async () => {
     if (this.isSupportedPlatform) {
       return this.rnkInAppUpdate.startUpdate();
     }
   }
 
-  completeUpdate() {
+  completeUpdate = () => {
     if (this.isSupportedPlatform) {
       this.rnkInAppUpdate.completeUpdate();
     }
   }
 
-  async getUpdateStatus() {
+  getUpdateStatus = async () => {
     if (this.isSupportedPlatform) {
       return this.rnkInAppUpdate.getUpdateStatus();
     }
   }
 
-  async isUpdatedDownloaded() {
+  isUpdatedDownloaded = async () => {
     if (this.isSupportedPlatform) {
       return this.rnkInAppUpdate.isUpdatedDownloaded();
     }
   }
 
-  onFinishDownloadUpdate(callback = () => { }) {
+  onFinishDownloadUpdate = (callback = () => { }) => {
     this.rnkInAppUpdate.subscribeForDownloadedState();
     this.onFinisDownloadUpdateListiner = RNKInAppUpdateEvents.addListener(InAppUpdate.updateDownloadingFinishEventName, callback);
 
