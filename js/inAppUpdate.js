@@ -72,5 +72,4 @@ class InAppUpdate {
   }
 };
 
-export { UpdateType };
 export default InAppUpdate;
