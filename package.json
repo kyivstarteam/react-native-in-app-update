@@ -3,11 +3,11 @@
   "title": "React Native In App Update",
   "version": "1.0.0",
   "description": "In App Update from native services",
-  "main": "index.js",
+  "main": "js/index.js",
   "files": [
     "react-native-in-app-update/README.md",
     "android",
-    "index.js",
+    "js/index.js",
     "ios",
     "react-native-in-app-update.podspec"
   ],
