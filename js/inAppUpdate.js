@@ -54,9 +54,9 @@ class InAppUpdate {
     }
   }
 
-  isUpdatedDownloaded = async () => {
+  isUpdateDownloaded = async () => {
     if (this.isSupportedPlatform) {
-      return this.rnkInAppUpdate.isUpdatedDownloaded();
+      return this.rnkInAppUpdate.isUpdateDownloaded();
     }
   }
 
