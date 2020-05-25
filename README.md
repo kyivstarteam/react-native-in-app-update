@@ -31,11 +31,6 @@ Before going any further make sure that you:
     ```sh
     yarn add https://github.com/kyivstarteam/react-native-in-app-update.git
      ```
-2. Install iOS Pods
-     ```sh
-     cd ios
-     pod install
-     ```
 
 ## Usage
 
@@ -99,7 +94,7 @@ After a user accepts an immediate update, Google Play handles the update install
     
     const inAppUpdate = new InAppUpdate({ updateType: InAppUpdate.appUpdateType.IMMEDIATE });
     
-    const checkAvailableUpdate = async () => {
+    const checkAvailableUpdateAndInstall = async () => {
       const isUpdateAvailable = await inAppUpdate.isUpdateAvailable();
     
       if (isUpdateAvailable) {
@@ -109,7 +104,7 @@ After a user accepts an immediate update, Google Play handles the update install
     
     const App = () => {
       useEffect(() => {
-        checkAvailableUpdate();
+        checkAvailableUpdateAndInstall();
       }, []);
     
       return (
@@ -120,3 +115,4 @@ After a user accepts an immediate update, Google Play handles the update install
     };
    ``` 
 
+## Reference
