@@ -136,7 +136,7 @@ final public class InAppUpdateService {
         });
     }
 
-    public void isUpdatedDownloaded(final CallbackInterface callback) {
+    public void isUpdateDownloaded(final CallbackInterface callback) {
         final Task<AppUpdateInfo> appUpdateInfoTask = appUpdateManager.getAppUpdateInfo();
 
         appUpdateInfoTask.addOnSuccessListener(new OnSuccessListener<AppUpdateInfo>() {
