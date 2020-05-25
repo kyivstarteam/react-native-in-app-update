@@ -11,7 +11,7 @@ declare module '@kyivstarteam/react-native-in-app-update' {
     startUpdate: () => Promise<boolean>,
     isUpdatePaused: () => Promise<boolean>,
     getUpdateStatus: () => Promise<UpdateStatus>,
-    isUpdatedDownloaded: () => Promise<boolean>,
+    isUpdateDownloaded: () => Promise<boolean>,
     completeUpdate: () => void,
     subscribeForDownloadedState: () => void,
     unsubscribeForDownloadedState: () => void,
@@ -34,7 +34,7 @@ declare module '@kyivstarteam/react-native-in-app-update' {
     public isUpdatePaused(): Promise<boolean>;
     public startUpdate(): Promise<boolean>;
     public getUpdateStatus(): Promise<UpdateStatus>;
-    public isUpdatedDownloaded(): Promise<boolean>;
+    public isUpdateDownloaded(): Promise<boolean>;
     public completeUpdate(): void;
     public onFinishDownloadUpdate(callback: (state?: string) => void): () => void;
 

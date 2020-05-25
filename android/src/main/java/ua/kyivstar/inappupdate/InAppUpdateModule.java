@@ -113,8 +113,8 @@ public class InAppUpdateModule extends ReactContextBaseJavaModule implements Act
     }
 
     @ReactMethod
-    public void isUpdatedDownloaded(final Promise promise) {
-        inAppUpdateService.isUpdatedDownloaded(new InAppUpdateService.CallbackInterface() {
+    public void isUpdateDownloaded(final Promise promise) {
+        inAppUpdateService.isUpdateDownloaded(new InAppUpdateService.CallbackInterface() {
             @Override
             public <T> void invoke(T result, String error) {
                 if (error != null) {
