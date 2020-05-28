@@ -83,7 +83,7 @@ Before going any further make sure that you:
 * If you want to check for downloading status, for example if the user closed the application until the download is complete. You can check this status by isUpdatedDownloaded method. 
 See example below
 
-  ```js
+```js
     import { View, Text, Alert } from 'react-native';
     import React, { useEffect } from 'react';
     
@@ -103,7 +103,7 @@ See example below
     };
     
     const checkIsUpdateDownloaded = async () => {
-      const isUpdateDownloaded = await inAppUpdate.isUpdatedDownloaded();
+      const isUpdateDownloaded = await inAppUpdate.isUpdateDownloaded();
     
       if (isUpdateDownloaded) {
         completeUpdate();
@@ -159,3 +159,69 @@ After a user accepts an immediate update, Google Play handles the update install
    ``` 
 
 ## Reference
+
+### Init Options
+
+```js
+    { 
+      updateType: AppUpdateType, // Update type, Flexible or Immediate
+      stalenessDays: number, // how much time should passed since the update has released
+    }
+```
+
+### isUpdateAvailable
+
+Return `true` or `false`
+
+```js
+    inAppUpdate.isUpdateAvailable();
+```
+
+### isUpdatePaused
+
+Return `true` or `false`. If you start an immediate update, and during the process will close app. 
+You should check that update is not stalled. If its true. Just complete update.
+
+```js
+    inAppUpdate.isUpdatePaused();
+```
+
+### startUpdate
+
+Function that initiate updating
+
+```js
+    inAppUpdate.startUpdate();
+```
+
+### getUpdateStatus
+
+Returning update status ('FAILED' | 'SUCCESS' | 'INACTIVE');
+
+```js
+    inAppUpdate.getUpdateStatus();
+```
+
+### isUpdateDownloaded
+
+Return `true` or `false`. This method using with flexible update.
+
+```js
+    inAppUpdate.isUpdateDownloaded();
+```
+
+### completeUpdate
+
+Function that start updating after downloading
+
+```js
+    inAppUpdate.completeUpdate();
+```
+
+### onFinishDownloadUpdate
+
+Listener will trigger when update downloading is finished.
+
+```js
+    inAppUpdate.onFinishDownloadUpdate(callback: () => void);
+```
