@@ -80,6 +80,49 @@ Before going any further make sure that you:
     };
    ``` 
 
+* If you want to check for downloading status, for example if the user closed the application until the download is complete. You can check this status by isUpdatedDownloaded method. 
+See example below
+
+  ```js
+    import { View, Text, Alert } from 'react-native';
+    import React, { useEffect } from 'react';
+    
+    import InAppUpdate from '@kyivstarteam/react-native-in-app-update';
+
+    const inAppUpdate = new InAppUpdate({ updateType: InAppUpdate.appUpdateType.FLEXIBLE });
+  
+    const completeUpdate = () => {
+      Alert.alert(
+        'An update has just been downloaded.',
+        'Want to restart the app?',
+        [
+          { text: 'No', style: 'cancel' },
+          { text: 'Yes', onPress: inAppUpdate.completeUpdate },
+        ],
+      );
+    };
+    
+    const checkIsUpdateDownloaded = async () => {
+      const isUpdateDownloaded = await inAppUpdate.isUpdatedDownloaded();
+    
+      if (isUpdateDownloaded) {
+        completeUpdate();
+      }
+    };
+    
+    const App = () => {
+      useEffect(() => {
+        checkIsUpdateDownloaded();
+      }, []);
+
+      return (
+        <View>
+          <Text>App</Text>
+        </View>
+      );
+    };
+   ``` 
+
 ### Immediate update
 
 A full screen user experience that requires the user to update and restart the app in order to continue
