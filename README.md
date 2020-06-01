@@ -18,7 +18,7 @@
 ## Getting Started 
 
 ### Prerequisites
-This feature works only on Android devices.
+This feature works only on Android devices starting from API level 21 (Android 5.0).
 
 Before going any further make sure that you:
 1. have published android application in Google Play Console.
