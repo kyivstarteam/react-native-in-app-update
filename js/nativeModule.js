@@ -5,7 +5,7 @@ if (__DEV__ && Platform.OS === 'ios' ) {
   console.warn(`@kyivstarteam/react-native-in-app-update: Module does not support ios platform`);
 }
 
-if (!RNKInAppUpdate) {
+if (Platform.OS === 'android' && !RNKInAppUpdate) {
   throw new Error(
     `@kyivstarteam/react-native-in-app-update: NativeModule.RNKInAppUpdate is null. To fix this issue try these steps:
     • For react-native <= 0.59: Run \`react-native link @kyivstarteam/react-native-in-app-update\` in the project root.
