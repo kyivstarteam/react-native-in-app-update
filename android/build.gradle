@@ -48,7 +48,7 @@ android {
         minSdkVersion safeExtGet('minSdkVersion', DEFAULT_MIN_SDK_VERSION)
         targetSdkVersion safeExtGet('targetSdkVersion', DEFAULT_TARGET_SDK_VERSION)
         versionCode 2
-        versionName "1.1.1"
+        versionName "1.2.0"
     }
     lintOptions {
         abortOnError false
@@ -73,7 +73,7 @@ repositories {
 dependencies {
     //noinspection GradleDynamicVersion
     implementation 'com.facebook.react:react-native:+'  // From node_modules
-    implementation 'com.google.android.play:core:1.7.2'
+    implementation 'com.google.android.play:core:1.8.0'
     implementation 'com.android.support:support-annotations:28.0.0'
 }
 
