@@ -2,7 +2,6 @@ package ua.kyivstar.inappupdate;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.support.annotation.Nullable;
 import android.util.Log;
 
 import com.facebook.react.bridge.ActivityEventListener;
@@ -140,7 +139,7 @@ public class InAppUpdateModule extends ReactContextBaseJavaModule implements Act
 
     private void sendEvent(ReactContext reactContext,
                            String eventName,
-                           @Nullable WritableMap params) {
+                           WritableMap params) {
         reactContext
                 .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
                 .emit(eventName, params);
