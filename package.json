@@ -1,7 +1,7 @@
 {
   "name": "@kyivstarteam/react-native-in-app-update",
   "title": "React Native In App Update",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "description": "In App Update from native services",
   "main": "js/index.js",
   "files": [
